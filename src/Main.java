@@ -1,7 +1,3 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class Main {
 
     public static TreeNode<String> getTree() {
@@ -19,42 +15,15 @@ public class Main {
         return A;
     }
 
-    public static void dfs(TreeNode<String> root) {
-        if (root != null) {
-            root.visit();
-            root.getNeighbors()
-                    .stream()
-                    .filter(node -> (node != null && !node.isVisited())).forEach(Main::dfs);
-        }
-    }
-
-    public static void bfs(TreeNode<String> root, ArrayList<TreeNode<String>> queue) {
-        if (root != null) {
-
-            if (queue == null) {
-                queue = new ArrayList<TreeNode<String>>();
-            }
-
-            root.visit();
-            root.getNeighbors()
-                    .stream()
-                    .filter(node -> (node != null && !node.isVisited()))
-                    .forEach(queue::add);
-
-            while (!queue.isEmpty()) {
-                TreeNode<String> node = queue.remove(0);
-                bfs(node, queue);
-            }
-        }
-    }
-
     public static void main(String[] args) {
         TreeNode<String> root = getTree();
-        dfs(root);
+        System.out.print("DFS: ");
+        Algorithms.dfs(root);
+        System.out.print("\n");
 
+        System.out.print("BFS: ");
         root = getTree();
-        System.out.println("\n");
-        bfs(root, null);
+        Algorithms.bfs(root);
     }
 
 }
