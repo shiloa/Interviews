@@ -1,3 +1,5 @@
+import javax.transaction.TransactionRequiredException;
+
 public class Main {
 
     public static TreeNode<String> getTree() {
@@ -17,6 +19,11 @@ public class Main {
 
     public static void main(String[] args) {
         TreeNode<String> root = getTree();
+        System.out.println("The height of the tree is " + Algorithms.getTreeHeight(root));
+
+        String balanced = Algorithms.isTreeBalanced(root) ? "" : " not";
+        System.out.println("The tree is" + balanced + " balanced");
+
         System.out.print("DFS: ");
         Algorithms.dfs(root);
         System.out.print("\n");

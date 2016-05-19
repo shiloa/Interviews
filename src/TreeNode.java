@@ -18,6 +18,14 @@ public class TreeNode<T> {
         this.isVisited = false;
     }
 
+    public TreeNode getLeft() {
+        return this.left;
+    }
+
+    public TreeNode getRight() {
+        return this.right;
+    }
+
     public void assign(TreeNode left, TreeNode right) {
         this.left = left;
         this.right = right;
