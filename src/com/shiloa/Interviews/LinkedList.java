@@ -54,6 +54,48 @@ class LinkedList<T> {
         return current;
     }
 
+    void remove(T data) {
+        if (this.length > 0) {
+
+            Node<T> current = this.head;
+            Node<T> next;
+            Node<T> prev;
+
+            while (!Objects.isNull(current)) {
+                if (current.getData() == data) {
+                    next = current.getNext();
+                    prev = current.getPrev();
+
+                    // in case the removed node is the head
+                    if (current == this.head) {
+                        this.head = next;
+                    }
+
+                    // in case only head exists in the list
+                    if (current == this.tail) {
+                        this.tail = prev;
+                    }
+
+                    if (!Objects.isNull(prev)) {
+                        prev.setNext(next);
+                    }
+
+                    if (!Objects.isNull(next)) {
+                        next.setPrev(prev);
+                    }
+
+                    this.length--;
+                    return;
+                }
+                current = current.getNext();
+            }
+        }
+    }
+
+    void decrementLength() {
+        this.length--;
+    }
+
     Node<T> removeNodeAt(int index) {
         if (index > this.length) {
             return null;
