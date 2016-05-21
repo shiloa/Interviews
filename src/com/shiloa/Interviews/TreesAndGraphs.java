@@ -1,8 +1,8 @@
-import apple.laf.JRSUIUtils;
+package com.shiloa.Interviews;
 
 import java.util.ArrayList;
 
-public class Algorithms {
+public class TreesAndGraphs {
 
     /**
      * Depth First Search
@@ -13,7 +13,7 @@ public class Algorithms {
             root.visit();
             root.getNeighbors()
                     .stream()
-                    .filter(node -> (node != null && !node.isVisited())).forEach(Algorithms::dfs);
+                    .filter(node -> (node != null && !node.isVisited())).forEach(TreesAndGraphs::dfs);
         }
     }
 

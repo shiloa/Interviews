@@ -1,10 +1,11 @@
-import java.util.ArrayList;
+package com.shiloa.Interviews;
+
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * A naive implementation of a binary tree's node
- * @param <T> the datatype for this node
+ * @param <T> the data type for this node
  */
 public class TreeNode<T> {
 
@@ -13,35 +14,35 @@ public class TreeNode<T> {
     private T data;
     private boolean isVisited;
 
-    public TreeNode(T data) {
+    TreeNode(T data) {
         this.data = data;
         this.isVisited = false;
     }
 
-    public TreeNode getLeft() {
+    TreeNode getLeft() {
         return this.left;
     }
 
-    public TreeNode getRight() {
+    TreeNode getRight() {
         return this.right;
     }
 
-    public void assign(TreeNode left, TreeNode right) {
+    void assign(TreeNode left, TreeNode right) {
         this.left = left;
         this.right = right;
         this.isVisited = false;
     }
 
-    public List<TreeNode<T>> getNeighbors() {
+    List<TreeNode<T>> getNeighbors() {
         return Arrays.asList(this.left, this.right);
     }
 
-    public void visit() {
+    void visit() {
         this.isVisited = true;
         System.out.print(this.data + " ");
     }
 
-    public boolean isVisited() {
+    boolean isVisited() {
         return this.isVisited;
     }
 }
