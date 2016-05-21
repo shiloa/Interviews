@@ -90,7 +90,8 @@ class ArraysAndStrings {
     String replaceSpacesInString(String input) {
         char[] output = input.toCharArray();
 
-        for (int i = 0; i < output.length ; i++) {
+        // shift the string according to allotted spaces
+        for (int i = output.length; i > 0; i--) {
             if (output[i] == ' ') {
                 // TODO: FIXME
                 return "TODO";
