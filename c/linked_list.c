@@ -1,12 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include "linked_list.h"
 
-typedef struct node {
-    struct node * next;
-    int val;
-} node_t;
+// initialize an empty list
+node_t * init_list() {
+    node_t * head = (node_t *)malloc(sizeof(node_t));
 
+    if (head == NULL) {
+        return NULL;
+    }
+
+    head->next = NULL;
+
+    return head;
+}
+
+// get list length
+int get_length(node_t * head) {
+    int counter = 0;
+
+    if (head == NULL) {
+        return counter;
+    }
+
+    node_t * current = head;
+
+    while (current->next != NULL) {
+        counter++;
+        current = current->next;
+    }
+
+    return counter;
+}
+
+// create a node and return its pointer
 node_t * create_node(int val) {
     node_t * new_node = (node_t *)malloc(sizeof(node_t));
     if (new_node == NULL) {
@@ -18,40 +45,38 @@ node_t * create_node(int val) {
     return new_node;
 }
 
+// add a node to a list that starts at head
 bool add_node(node_t * head, int val) {
     node_t * current = head;
-
-    while(current->next != NULL) {
-        current = current->next;
-    }
-
     node_t * new_node = create_node(val);
 
+    // if node creation failed
     if (new_node == NULL) {
         return false;
+    }
+
+    // edge case - the list is empty: add to head
+    if (head == NULL) {
+        head = new_node;
+        return true;
+    }
+
+    // normal case - seek the end of the list
+    while(current->next != NULL) {
+        current = current->next;
     }
 
     current->next = new_node;
     return true;
 }
 
+// print a list given its head
 void print_list(node_t * head) {
     node_t * current = head;
     while(current->next != NULL) {
         printf("%d -> ", current->val);
         current = current->next;
     }
+
     printf("NULL");
-}
-
-int main() {
-    node_t * head = create_node(1);
-    add_node(head, 2);
-    add_node(head, 3);
-    add_node(head, 4);
-    add_node(head, 5);
-
-    print_list(head);
-
-    return 0;
 }
