@@ -1,6 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "linked_list.h"
+
+// simple detection whether the list is empty
+bool is_empty(node_t * head) {
+    return (!head || head == NULL) ? true : false;
+}
+
+// get the length of the list (by traversing the elements)
+int length(node_t * head) {
+    int counter = 0;
+    node_t * current = head;
+
+    while (current != NULL) {
+        counter++;
+        current = current->next;
+    }
+
+    return counter;
+}
 
 // initialize an empty list
 node_t * init_list() {
@@ -62,13 +81,37 @@ bool add_node(node_t * head, int val) {
     }
 
     // normal case - seek the end of the list
-    while(current->next != NULL) {
+    while (current->next != NULL) {
         current = current->next;
     }
 
     current->next = new_node;
     return true;
 }
+
+/**
+ *
+// get a string representation of the list
+char * to_string(node_t * head) {
+    // get the length of the list to know the size
+    // of buffer to allocate
+    int len = length(head) * 5 + 10;
+    char buf[len];
+
+    node_t * current = head;
+
+    while(current->next != NULL) {
+        char str[5];
+        sprintf(str, "%d -> ", current->val);
+        strcpy(buf, str);
+        current = current->next;
+    }
+
+    strcpy(buf, "NULL");
+
+    return buf;
+}
+*/
 
 // print a list given its head
 void print_list(node_t * head) {

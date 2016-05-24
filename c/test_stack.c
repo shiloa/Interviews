@@ -15,10 +15,11 @@ node_t * get_stack() {
 }
 
 void test_is_empty() {
-    assert(is_empty(NULL));
+    node_t * stack;
+    assert(is_empty(stack));
 }
 
-void test_stack() {
+void test_stack_pop() {
     int val;
     node_t * stack = get_stack();
 
@@ -32,10 +33,23 @@ void test_stack() {
     assert(val == 2);
     val = *pop(&stack);
     assert(val == 1);
+    /* assert(is_empty(stack)); */
 }
 
+void test_stack_peek() {
+    int val, i;
+    node_t * stack = get_stack();
+
+    for (i = 0; i < 5; ++i) {
+        val = *peek(stack);
+        assert(val == 5);
+    }
+}
+
+
 int main() {
-    /* test_is_empty(); */
-    test_stack();
+    test_is_empty();
+    test_stack_pop();
+    test_stack_peek();
     return 0;
 }

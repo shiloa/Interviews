@@ -7,9 +7,6 @@
 // being inserted at the head
 node_t * init_stack();
 
-// simple detection whether the stack is empty
-bool is_empty(node_t *);
-
 // push new values to the stack
 // - pass by reference as the list needs to change in place
 bool push(node_t **, int);

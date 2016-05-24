@@ -8,11 +8,6 @@ node_t * init_stack() {
     return init_list();
 }
 
-// simple detection whether the stack is empty
-bool is_empty(node_t * stack) {
-    return (stack == NULL) ? true : false;
-}
-
 // push new values to the stack
 bool push(node_t ** stack, int newval) {
 
@@ -49,8 +44,12 @@ int * pop(node_t ** stack) {
     // promote the stack to the next element
     *stack = top->next;
 
+    if (top->next == NULL) {
+        *stack = NULL;
+    }
+
     // free the memory occupied by the popped node
-    /* free(top); */
+    free(top);
 
     return val;
 }
