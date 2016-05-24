@@ -5,11 +5,11 @@
 
 list_stack_t * get_stack() {
     list_stack_t * stack = init_stack();
-    push(&stack, 1);
-    push(&stack, 2);
-    push(&stack, 3);
-    push(&stack, 4);
-    push(&stack, 5);
+    push(&stack, create_node(1));
+    push(&stack, create_node(2));
+    push(&stack, create_node(3));
+    push(&stack, create_node(4));
+    push(&stack, create_node(5));
 
     return stack;
 }
@@ -20,33 +20,34 @@ void test_is_empty() {
 }
 
 void test_stack_pop() {
-    int val;
+    node_t * temp;
     list_stack_t * stack = get_stack();
 
-    val = *pop(&stack);
-    assert(val == 5);
-    val = *pop(&stack);
-    assert(val == 4);
-    val = *pop(&stack);
-    assert(val == 3);
-    val = *pop(&stack);
-    assert(val == 2);
-    val = *pop(&stack);
-    assert(val == 1);
+    temp = pop(&stack);
+    assert(temp->val == 5);
+    temp = pop(&stack);
+    assert(temp->val == 4);
+    temp = pop(&stack);
+    assert(temp->val == 3);
+    temp = pop(&stack);
+    assert(temp->val == 2);
+    temp = pop(&stack);
+    assert(temp->val == 1);
 
     assert(pop(&stack) == NULL);
 }
 
 void test_stack_peek() {
-    int val, i;
+    int i;
+    node_t * temp;
+
     list_stack_t * stack = get_stack();
 
     for (i = 0; i < 5; ++i) {
-        val = *peek(stack);
-        assert(val == 5);
+        node_t * temp = peek(stack);
+        assert(temp->val == 5);
     }
 }
-
 
 int main() {
     test_is_empty();

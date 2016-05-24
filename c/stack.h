@@ -15,16 +15,16 @@ list_stack_t * init_stack();
 
 // push new values to the stack
 // - pass by reference as the list needs to change in place
-bool push(list_stack_t **, int);
+bool push(list_stack_t **, node_t *);
 
 // pop the top of the stack
 // - using an int ptr in case the list is empty
 // - also pass by reference as the list needs to change in place
-int * pop(list_stack_t **);
+node_t * pop(list_stack_t **);
 
 // get the value at the top of the stack (w/o popping)
 // (using a ptr in case the list is empty)
-int * peek(list_stack_t *);
+node_t * peek(list_stack_t *);
 
 // check is the stack is empty
 bool is_empty_stack(list_stack_t *);

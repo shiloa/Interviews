@@ -17,27 +17,25 @@ bool is_empty_stack(list_stack_t * stack) {
 }
 
 // push new values to the stack
-bool push(list_stack_t ** stack, int newval) {
-
-    node_t * top = create_node(newval);
+bool push(list_stack_t ** stack, node_t * new_node) {
 
     if (is_empty_stack(*stack)) {
-        (*stack)->head = (*stack)->tail = top;
+        (*stack)->head = (*stack)->tail = new_node;
         (*stack)->count++;
         return true;
     }
 
     // add the new node to the top of the stack
     // and promote counter
-    top->next = (*stack)->head;
-    (*stack)->head = top;
+    new_node->next = (*stack)->head;
+    (*stack)->head = new_node;
     (*stack)->count++;
 
     return true;
 }
 
 // pop the top of the stack
-int * pop(list_stack_t ** stack) {
+node_t * pop(list_stack_t ** stack) {
 
     // empty stack returns null
     if (is_empty_stack(*stack)) {
@@ -46,7 +44,6 @@ int * pop(list_stack_t ** stack) {
 
     // save the pointer to the top element
     node_t * top = (*stack)->head;
-    int * val = &(top->val);
 
     // replace the front of the stack with the next node
     (*stack)->head = top->next;
@@ -57,20 +54,17 @@ int * pop(list_stack_t ** stack) {
         (*stack)->head = (*stack)->tail = NULL;
     }
 
-    free(top);
-
-    return val;
+    return top;
 }
 
 // get the value at the top of the stack (w/o popping)
 // (using a ptr in case the list is empty)
-int * peek(list_stack_t * stack) {
+node_t * peek(list_stack_t * stack) {
     if (is_empty_stack(stack)) {
         return NULL;
     }
 
     node_t * top = (stack)->head;
-    int * val = &(top->val);
 
-    return val;
+    return top;
 }

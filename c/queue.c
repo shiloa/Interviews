@@ -16,9 +16,7 @@ bool is_empty_queue(queue_t * queue) {
 }
 
 // push a value into the queue
-bool enqueue(queue_t ** queue, int newval) {
-
-    node_t * new_node = create_node(newval);
+bool enqueue(queue_t ** queue, node_t * new_node) {
 
     // edge case: first element
     if (is_empty_queue(*queue)) {
@@ -37,14 +35,13 @@ bool enqueue(queue_t ** queue, int newval) {
 }
 
 // retrieve a value from the queue
-int * dequeue(queue_t ** queue) {
+node_t * dequeue(queue_t ** queue) {
     if (is_empty_queue(*queue)) {
         return NULL;
     }
 
     // pop the first element
     node_t * top = (*queue)->head;
-    int * val = &(top->val);
 
     (*queue)->head = top->next;
     // replace the front of the queue with the next node
@@ -55,7 +52,5 @@ int * dequeue(queue_t ** queue) {
         (*queue)->head = (*queue)->tail = NULL;
     }
 
-    free(top);
-
-    return val;
+    return top;
 }

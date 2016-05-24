@@ -1,4 +1,5 @@
 #include "btree.h"
+#include "queue.h"
 
 // initialize an empty tree node
 tree_node_t * create_tree_node(int val) {
@@ -9,6 +10,7 @@ tree_node_t * create_tree_node(int val) {
     }
 
     new_node->val = val;
+    new_node->visited = false;
     new_node->left = new_node->right = NULL;
     return new_node;
 }
@@ -30,8 +32,14 @@ tree_node_t * bst_insert(tree_node_t * root, int newval) {
 
 // simple implementation of BFS that prints 
 // the order nodes are visited (in-order BFS)
-void bfs(tree_node_t * root) {
-    if (root != NULL) printf("%d ", root->val);
+void bfs_helper(tree_node_t * root, queue_t * queue) {
+
+    if (root != NULL) {
+        printf("%d ", root->val);
+    }
+
+    enqueue(&queue, root->left->val);
+    enqueue(&queue, root->right->val);
 
     if (root->left != NULL) {
         printf("%d")

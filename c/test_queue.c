@@ -5,31 +5,31 @@
 queue_t * get_queue() {
     queue_t * queue = init_queue();
     assert(queue->count == 0);
-    enqueue(&queue, 1);
-    enqueue(&queue, 2);
-    enqueue(&queue, 3);
-    enqueue(&queue, 4);
-    enqueue(&queue, 5);
+    enqueue(&queue, create_node(1));
+    enqueue(&queue, create_node(2));
+    enqueue(&queue, create_node(3));
+    enqueue(&queue, create_node(4));
+    enqueue(&queue, create_node(5));
 
     return queue;
 }
 
 void test_queue_dequeue() {
-    int val;
+    node_t * temp;
     queue_t * queue = get_queue();
 
     assert(queue->count == 5);
 
-    val = *dequeue(&queue);
-    assert(val == 1);
-    val = *dequeue(&queue);
-    assert(val == 2);
-    val = *dequeue(&queue);
-    assert(val == 3);
-    val = *dequeue(&queue);
-    assert(val == 4);
-    val = *dequeue(&queue);
-    assert(val == 5);
+    temp = dequeue(&queue);
+    assert(temp->val == 1);
+    temp = dequeue(&queue);
+    assert(temp->val == 2);
+    temp = dequeue(&queue);
+    assert(temp->val == 3);
+    temp = dequeue(&queue);
+    assert(temp->val == 4);
+    temp = dequeue(&queue);
+    assert(temp->val == 5);
 
     // checking for null pop
     assert(dequeue(&queue) == NULL);
@@ -38,7 +38,7 @@ void test_queue_dequeue() {
 void test_queue_enqueue() {
     queue_t * queue = get_queue();
     assert(queue->count == 5);
-    enqueue(&queue, 6);
+    enqueue(&queue, create_node(6));
     assert(queue->count == 6);
 }
 

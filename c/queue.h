@@ -13,10 +13,10 @@ typedef struct _queue {
 queue_t * init_queue();
 
 // push a value into the queue
-bool enqueue(queue_t **, int);
+bool enqueue(queue_t **, node_t *);
 
 // retrieve a value from the queue
-int * dequeue(queue_t **);
+node_t * dequeue(queue_t **);
 
 // check if queue is empty
 bool is_empty_queue(queue_t *);
