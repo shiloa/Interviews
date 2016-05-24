@@ -90,33 +90,33 @@ bool add_node(node_t * head, int val) {
 }
 
 /**
- *
-// get a string representation of the list
-char * to_string(node_t * head) {
-    // get the length of the list to know the size
-    // of buffer to allocate
-    int len = length(head) * 5 + 10;
-    char buf[len];
-
-    node_t * current = head;
-
-    while(current->next != NULL) {
-        char str[5];
-        sprintf(str, "%d -> ", current->val);
-        strcpy(buf, str);
-        current = current->next;
-    }
-
-    strcpy(buf, "NULL");
-
-    return buf;
-}
-*/
+ * TODO: fix
+ * // get a string representation of the list
+ * char * to_string(node_t * head) {
+ *     // get the length of the list to know the size
+ *     // of buffer to allocate
+ *     int len = length(head) * 5 + 10;
+ *     char buf[len];
+ * 
+ *     node_t * current = head;
+ * 
+ *     while(current->next != NULL) {
+ *         char str[5];
+ *         sprintf(str, "%d -> ", current->val);
+ *         strcpy(buf, str);
+ *         current = current->next;
+ *     }
+ * 
+ *     strcpy(buf, "NULL");
+ * 
+ *     return buf;
+ * }
+ */
 
 // print a list given its head
 void print_list(node_t * head) {
     node_t * current = head;
-    while(current->next != NULL) {
+    while(current!= NULL) {
         printf("%d -> ", current->val);
         current = current->next;
     }

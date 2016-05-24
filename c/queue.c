@@ -1,31 +1,61 @@
-#include "queue.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "queue.h"
 
 // initialize an empty queue
-node_t * init_queue(int val) {
-    node_t * queue = init_list();
-    queue->val = val;
+queue_t * init_queue() {
+    queue_t * queue = (queue_t *)malloc(sizeof(queue_t));
+    queue->count = 0;
+    queue->head = queue->tail = NULL;
     return queue;
 }
 
-// push a value into the queue
-bool enqueue(node_t * queue, int newval) {
+bool is_empty_queue(queue_t * queue) {
+    return (queue->count == 0) ? true : false;
+}
 
-    // simply adding to a linked list
-    return add_node(queue, newval);
+// push a value into the queue
+bool enqueue(queue_t ** queue, int newval) {
+
+    node_t * new_node = create_node(newval);
+
+    // edge case: first element
+    if (is_empty_queue(*queue)) {
+        (*queue)->head = (*queue)->tail = new_node;
+        (*queue)->count++;
+        return true;
+    }
+
+    // otherwise, insert at the end and update the tail
+    // and the count
+    (*queue)->tail->next = new_node;
+    (*queue)->tail = new_node;
+    (*queue)->count++;
+
+    return true;
 }
 
 // retrieve a value from the queue
-int * dequeue(node_t ** queue) {
-    if (queue == NULL) {
+int * dequeue(queue_t ** queue) {
+    if (is_empty_queue(*queue)) {
         return NULL;
     }
 
     // pop the first element
-    node_t * top = *queue;
+    node_t * top = (*queue)->head;
+    int * val = &(top->val);
 
+    (*queue)->head = top->next;
     // replace the front of the queue with the next node
-    *queue = top->next;
+    (*queue)->count--;
 
-    return &(top->val);
+    // see if we've emptied the queue
+    if ((*queue)->count == 0) {
+        (*queue)->head = (*queue)->tail = NULL;
+    }
+
+    free(top);
+
+    return val;
 }

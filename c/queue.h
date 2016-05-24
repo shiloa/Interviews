@@ -3,14 +3,22 @@
 
 #include "linked_list.h"
 
+typedef struct _queue {
+    int count;
+    node_t * head;
+    node_t * tail;
+} queue_t;
+
 // initialize an empty queue
-node_t * init_queue(int);
+queue_t * init_queue();
 
 // push a value into the queue
-bool enqueue(node_t *, int);
+bool enqueue(queue_t **, int);
 
 // retrieve a value from the queue
-int * dequeue(node_t **);
+int * dequeue(queue_t **);
 
+// check if queue is empty
+bool is_empty_queue(queue_t *);
 
 #endif

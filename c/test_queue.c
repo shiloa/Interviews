@@ -1,21 +1,24 @@
+#include <stdio.h>
 #include <assert.h>
 #include "queue.h"
 
-node_t * get_queue() {
-    node_t * queue = create_node(1);
-    enqueue(queue, 2);
-    enqueue(queue, 3);
-    enqueue(queue, 4);
-    enqueue(queue, 5);
+queue_t * get_queue() {
+    queue_t * queue = init_queue();
+    assert(queue->count == 0);
+    enqueue(&queue, 1);
+    enqueue(&queue, 2);
+    enqueue(&queue, 3);
+    enqueue(&queue, 4);
+    enqueue(&queue, 5);
 
     return queue;
 }
 
 void test_queue_dequeue() {
     int val;
-    node_t * queue = get_queue();
+    queue_t * queue = get_queue();
 
-    assert(length(queue) == 5);
+    assert(queue->count == 5);
 
     val = *dequeue(&queue);
     assert(val == 1);
@@ -27,13 +30,16 @@ void test_queue_dequeue() {
     assert(val == 4);
     val = *dequeue(&queue);
     assert(val == 5);
+
+    // checking for null pop
+    assert(dequeue(&queue) == NULL);
 }
 
 void test_queue_enqueue() {
-    node_t * queue = get_queue();
-    assert(length(queue) == 5);
-    enqueue(queue, 6);
-    assert(length(queue) == 6);
+    queue_t * queue = get_queue();
+    assert(queue->count == 5);
+    enqueue(&queue, 6);
+    assert(queue->count == 6);
 }
 
 int main() {

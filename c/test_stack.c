@@ -3,8 +3,8 @@
 #include <assert.h>
 #include "stack.h"
 
-node_t * get_stack() {
-    node_t * stack = init_stack();
+list_stack_t * get_stack() {
+    list_stack_t * stack = init_stack();
     push(&stack, 1);
     push(&stack, 2);
     push(&stack, 3);
@@ -15,13 +15,13 @@ node_t * get_stack() {
 }
 
 void test_is_empty() {
-    node_t * stack;
-    assert(is_empty(stack));
+    list_stack_t * stack = init_stack();
+    assert(is_empty_stack(stack));
 }
 
 void test_stack_pop() {
     int val;
-    node_t * stack = get_stack();
+    list_stack_t * stack = get_stack();
 
     val = *pop(&stack);
     assert(val == 5);
@@ -33,12 +33,13 @@ void test_stack_pop() {
     assert(val == 2);
     val = *pop(&stack);
     assert(val == 1);
-    /* assert(is_empty(stack)); */
+
+    assert(pop(&stack) == NULL);
 }
 
 void test_stack_peek() {
     int val, i;
-    node_t * stack = get_stack();
+    list_stack_t * stack = get_stack();
 
     for (i = 0; i < 5; ++i) {
         val = *peek(stack);
